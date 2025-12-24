@@ -67,9 +67,12 @@
             gap: 15px;
         }
 
-        .logo i {
-            font-size: 2rem;
-            color: var(--primary-color);
+        .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
         }
 
         .logo-text {
@@ -150,6 +153,16 @@
             text-align: center;
             margin-bottom: 3rem;
             color: var(--primary-color);
+        }
+
+        .subsection-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
         }
 
         /* History Section */
@@ -334,18 +347,31 @@
         }
 
         /* Leadership Section */
+        .leadership-section {
+            background: var(--white);
+            padding: 4rem 0;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
         .leadership-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
+            margin-bottom: 3rem;
         }
 
         .leader-card {
-            background: var(--white);
+            background: var(--background-light);
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-5px);
         }
 
         .leader-card img {
@@ -373,6 +399,13 @@
         .leader-bio {
             color: var(--text-light);
             line-height: 1.6;
+        }
+
+        /* Divider between sections */
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+            margin: 3rem 0;
         }
 
         /* Footer */
@@ -410,6 +443,18 @@
             padding-top: 2rem;
             border-top: 1px solid #444;
             color: #bbb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .footer-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
         }
 
         /* Responsive Design */
@@ -468,6 +513,15 @@
             .features-grid {
                 grid-template-columns: 1fr;
             }
+
+            .leadership-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -482,7 +536,7 @@
     <header>
         <nav class="container">
             <div class="logo">
-                <i class="fas fa-anchor"></i>
+                <img src="logo-60.png" alt="Eagle Harbor Citizens Association Logo">
                 <div>
                     <div class="logo-text">Eagle Harbor CA</div>
                     <div class="tagline">Paradise on The Patuxent</div>
@@ -592,8 +646,8 @@
                             <div class="stat-label">Mile of Waterfront</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number">5</div>
-                            <div class="stat-label">Board Members</div>
+                            <div class="stat-number">11</div>
+                            <div class="stat-label">Total Board Members</div>
                         </div>
                     </div>
                 </div>
@@ -637,38 +691,90 @@
             </section>
 
             <!-- Leadership Section -->
-            <section class="section">
-                <h2 class="section-title">Community Leadership</h2>
-                <div class="leadership-grid">
-                    <div class="leader-card">
-                        <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=JJ" alt="Mayor James S. Jones">
-                        <div class="leader-name">James S. Jones</div>
-                        <div class="leader-title">Mayor</div>
-                        <p class="leader-bio">Former Road Commissioner, now leading Eagle Harbor with a commitment to preserving our heritage while providing welcoming spaces for residents and visitors.</p>
+            <section class="leadership-section">
+                <div class="container">
+                    <h2 class="section-title">Community Leadership</h2>
+                    
+                    <!-- Citizens Association Board -->
+                    <div class="section">
+                        <h3 class="subsection-title">Citizens Association Board</h3>
+                        <div class="leadership-grid">
+                            <div class="leader-card">
+                                <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=JB" alt="President Janie Branson">
+                                <div class="leader-name">Janie Branson</div>
+                                <div class="leader-title">President</div>
+                                <p class="leader-bio">Leading the Citizens Association with dedication to community engagement and preserving our historic waterfront heritage while fostering unity among residents.</p>
+                            </div>
+                            <div class="leader-card">
+                                <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=CP" alt="Vice President Curtis Prince">
+                                <div class="leader-name">Curtis Prince</div>
+                                <div class="leader-title">Vice President</div>
+                                <p class="leader-bio">Supporting community initiatives and ensuring effective communication between residents and leadership while promoting Eagle Harbor's rich traditions.</p>
+                            </div>
+                            <div class="leader-card">
+                                <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=AD" alt="Secretary Anthony Delaney">
+                                <div class="leader-name">Anthony Delaney</div>
+                                <div class="leader-title">Secretary</div>
+                                <p class="leader-bio">Maintaining accurate records and facilitating transparent communication within our community while documenting our ongoing history.</p>
+                            </div>
+                            <div class="leader-card">
+                                <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=SL" alt="Treasurer Sabrina Littlejohn">
+                                <div class="leader-name">Sabrina Littlejohn</div>
+                                <div class="leader-title">Treasurer</div>
+                                <p class="leader-bio">Managing community finances and ensuring responsible stewardship of association resources for the benefit of all Eagle Harbor residents.</p>
+                            </div>
+                            <div class="leader-card">
+                                <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=BS" alt="Sergeant of Arms Barbara Stanard">
+                                <div class="leader-name">Barbara Stanard</div>
+                                <div class="leader-title">Sergeant of Arms</div>
+                                <p class="leader-bio">Maintaining order during meetings and ensuring all community members have the opportunity to participate in association activities.</p>
+                            </div>
+                            <div class="leader-card">
+                                <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=BG" alt="Parliamentarian Bertha Guerra">
+                                <div class="leader-name">Bertha Guerra</div>
+                                <div class="leader-title">Parliamentarian</div>
+                                <p class="leader-bio">Ensuring proper procedures are followed during meetings and helping maintain the democratic processes that guide our community decisions.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="leader-card">
-                        <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=AB" alt="Commissioner Alton Branson">
-                        <div class="leader-name">Alton Branson</div>
-                        <div class="leader-title">Commissioner</div>
-                        <p class="leader-bio">Dedicated to community development and maintaining the high standards that make Eagle Harbor a special place to live.</p>
-                    </div>
-                    <div class="leader-card">
-                        <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=HB" alt="Commissioner Harold Bryant II">
-                        <div class="leader-name">Harold Bryant II</div>
-                        <div class="leader-title">Commissioner</div>
-                        <p class="leader-bio">Focused on infrastructure improvements and ensuring our community remains sustainable for future generations.</p>
-                    </div>
-                    <div class="leader-card">
-                        <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=PC" alt="Commissioner Patricia Crews">
-                        <div class="leader-name">Patricia Crews</div>
-                        <div class="leader-title">Commissioner</div>
-                        <p class="leader-bio">Passionate about community engagement and organizing events that bring our neighbors together.</p>
-                    </div>
-                    <div class="leader-card">
-                        <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=DL" alt="Commissioner Donnie Littlejohn">
-                        <div class="leader-name">Donnie Littlejohn</div>
-                        <div class="leader-title">Commissioner</div>
-                        <p class="leader-bio">Committed to preserving our waterfront environment and promoting recreational opportunities for all residents.</p>
+
+                    <div class="section-divider"></div>
+
+                    <!-- Board of Commissioners -->
+                    <div class="section">
+                        <h3 class="subsection-title">Board of Commissioners</h3>
+                        <div class="leadership-grid">
+                            <div class="leader-card">
+                                <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=JJ" alt="Mayor James S. Jones">
+                                <div class="leader-name">James S. Jones</div>
+                                <div class="leader-title">Mayor</div>
+                                <p class="leader-bio">Former Road Commissioner, now leading Eagle Harbor with a commitment to preserving our heritage while providing welcoming spaces for residents and visitors.</p>
+                            </div>
+                            <div class="leader-card">
+                                <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=AB" alt="Commissioner Alton Branson">
+                                <div class="leader-name">Alton Branson</div>
+                                <div class="leader-title">Commissioner</div>
+                                <p class="leader-bio">Dedicated to community development and maintaining the high standards that make Eagle Harbor a special place to live.</p>
+                            </div>
+                            <div class="leader-card">
+                                <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=HB" alt="Commissioner Harold Bryant II">
+                                <div class="leader-name">Harold Bryant II</div>
+                                <div class="leader-title">Commissioner</div>
+                                <p class="leader-bio">Focused on infrastructure improvements and ensuring our community remains sustainable for future generations.</p>
+                            </div>
+                            <div class="leader-card">
+                                <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=PC" alt="Commissioner Patricia Crews">
+                                <div class="leader-name">Patricia Crews</div>
+                                <div class="leader-title">Commissioner</div>
+                                <p class="leader-bio">Passionate about community engagement and organizing events that bring our neighbors together.</p>
+                            </div>
+                            <div class="leader-card">
+                                <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=DL" alt="Commissioner Donnie Littlejohn">
+                                <div class="leader-name">Donnie Littlejohn</div>
+                                <div class="leader-title">Commissioner</div>
+                                <p class="leader-bio">Committed to preserving our waterfront environment and promoting recreational opportunities for all residents.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -701,6 +807,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
+                <img src="logo-80.png" alt="Eagle Harbor Citizens Association Logo" class="footer-logo">
                 <p>&copy; 2025 Eagle Harbor Citizens Association. All rights reserved. | Paradise on The Patuxent</p>
             </div>
         </div>
