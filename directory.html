@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Directory - Eagle Harbor Citizens Association</title>
+    <meta name="description" content="Connect with Eagle Harbor community members through our secure member directory. Access contact information and community resources.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2c5aa0;
+            --secondary-color: #1a4480;
+            --accent-color: #f4a261;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --background-light: #f8f9fa;
+            --white: #ffffff;
+            --gradient-bg: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--gradient-bg);
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(44, 90, 160, 0.9), rgba(26, 68, 128, 0.9)), 
+                        url('https://live.staticflickr.com/4405/36592800741_fe7d251676_b.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* Login Section */
+        .login-section {
+            background: var(--white);
+            padding: 4rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .login-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .login-section p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            margin-top: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Directory Preview */
+        .directory-preview {
+            background: var(--background-light);
+            padding: 3rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .directory-preview h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .preview-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 90, 160, 0.1);
+            backdrop-filter: blur(5px);
+            z-index: 1;
+        }
+
+        .preview-card .content {
+            position: relative;
+            z-index: 2;
+            filter: blur(2px);
+        }
+
+        .preview-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .preview-card h4 {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .lock-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+
+        /* Access Instructions */
+        .access-instructions {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .access-instructions h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .instructions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .instruction-step {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .instruction-step h4 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .instruction-step p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: var(--background-light);
+            padding: 3rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .features-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-item i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-top: 0.2rem;
+            min-width: 24px;
+        }
+
+        .feature-content h4 {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-content p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section p, .footer-section a {
+            color: #bbb;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #bbb;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .login-section {
+                padding: 2rem;
+            }
+
+            .preview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .instructions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-anchor"></i>
+                <div>
+                    <div class="logo-text">Eagle Harbor CA</div>
+                    <div class="tagline">Paradise on The Patuxent</div>
+                </div>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="directory.html" class="active">Directory</a></li>
+                <li><a href="documents.html">Documents</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Member Directory</h1>
+            <p>Connect with fellow Eagle Harbor community members and neighbors</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Login Section -->
+            <section class="login-section">
+                <h3>Access Member Directory</h3>
+                <p>The member directory is available to current Eagle Harbor residents only. Please log in with your community credentials to access contact information and connect with your neighbors.</p>
+                
+                <form class="login-form" id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Username or Email</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Access Directory</button>
+                    <a href="contact.html" class="btn btn-secondary">Request Access</a>
+                </form>
+            </section>
+
+            <!-- Directory Preview -->
+            <section class="directory-preview">
+                <h3>Directory Features Preview</h3>
+                <div class="preview-grid">
+                    <div class="preview-card">
+                        <div class="content">
+                            <i class="fas fa-user"></i>
+                            <h4>John & Mary Smith</h4>
+                            <p>123 Waterfront Drive<br>(301) 555-0123<br>jsmith@email.com</p>
+                        </div>
+                        <div class="lock-overlay">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+
+                    <div class="preview-card">
+                        <div class="content">
+                            <i class="fas fa-users"></i>
+                            <h4>The Johnson Family</h4>
+                            <p>456 Harbor Lane<br>(301) 555-0456<br>johnson.family@email.com</p>
+                        </div>
+                        <div class="lock-overlay">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+
+                    <div class="preview-card">
+                        <div class="content">
+                            <i class="fas fa-home"></i>
+                            <h4>Robert & Linda Davis</h4>
+                            <p>789 Patuxent View<br>(301) 555-0789<br>davis.family@email.com</p>
+                        </div>
+                        <div class="lock-overlay">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Access Instructions -->
+            <section class="access-instructions">
+                <h3>How to Get Directory Access</h3>
+                <div class="instructions-grid">
+                    <div class="instruction-step">
+                        <div class="step-number">1</div>
+                        <h4>Verify Residency</h4>
+                        <p>Confirm you are a current Eagle Harbor resident with property ownership or rental agreement documentation.</p>
+                    </div>
+
+                    <div class="instruction-step">
+                        <div class="step-number">2</div>
+                        <h4>Contact Board</h4>
+                        <p>Reach out to the Citizens Association board through our contact form or attend a monthly town meeting.</p>
+                    </div>
+
+                    <div class="instruction-step">
+                        <div class="step-number">3</div>
+                        <h4>Receive Credentials</h4>
+                        <p>Once verified, you'll receive your login credentials via email or at the next community meeting.</p>
+                    </div>
+
+                    <div class="instruction-step">
+                        <div class="step-number">4</div>
+                        <h4>Access Directory</h4>
+                        <p>Log in to view contact information, connect with neighbors, and stay updated on community matters.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <h3>Directory Features</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-address-book"></i>
+                        <div class="feature-content">
+                            <h4>Contact Information</h4>
+                            <p>Access phone numbers, email addresses, and mailing addresses for all community members.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-search"></i>
+                        <div class="feature-content">
+                            <h4>Search & Filter</h4>
+                            <p>Easily find specific residents by name, address, or contact information using our search tools.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="feature-content">
+                            <h4>Address Mapping</h4>
+                            <p>View resident locations on an interactive community map to better connect with neighbors.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="feature-content">
+                            <h4>Privacy Protected</h4>
+                            <p>All information is secure and only accessible to verified community members with proper credentials.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div class="feature-content">
+                            <h4>Mobile Friendly</h4>
+                            <p>Access the directory from any device - desktop, tablet, or smartphone for convenience.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-sync-alt"></i>
+                        <div class="feature-content">
+                            <h4>Regular Updates</h4>
+                            <p>Directory information is regularly updated to ensure accuracy and current contact details.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Guidelines -->
+            <section class="access-instructions">
+                <h3>Directory Usage Guidelines</h3>
+                <div class="instructions-grid">
+                    <div class="instruction-step">
+                        <i class="fas fa-handshake" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h4>Respectful Use</h4>
+                        <p>Use contact information respectfully and only for community-related purposes. Respect privacy and personal boundaries.</p>
+                    </div>
+
+                    <div class="instruction-step">
+                        <i class="fas fa-ban" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h4>No Commercial Use</h4>
+                        <p>Directory information may not be used for commercial purposes, solicitation, or marketing activities.</p>
+                    </div>
+
+                    <div class="instruction-step">
+                        <i class="fas fa-user-secret" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h4>Confidentiality</h4>
+                        <p>Do not share directory information with non-residents or use it outside of the Eagle Harbor community.</p>
+                    </div>
+
+                    <div class="instruction-step">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h4>Report Issues</h4>
+                        <p>Report any misuse of directory information or privacy concerns to the Citizens Association board immediately.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 23308 Hawkins Drive<br>Aquasco, MD 20608-0028</p>
+                    <p><i class="fas fa-phone"></i> (301) 888-2410</p>
+                    <p><i class="fas fa-envelope"></i> info@eagleharborca.org</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="about.html">About Eagle Harbor</a></p>
+                    <p><a href="events.html">Community Events</a></p>
+                    <p><a href="documents.html">Important Documents</a></p>
+                    <p><a href="contact.html">Contact Board</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Community Resources</h3>
+                    <p><a href="https://townofeagleharborincmd.org" target="_blank">Official Town Website</a></p>
+                    <p><a href="documents.html">Constitution & Bylaws</a></p>
+                    <p><a href="gallery.html">Photo Gallery</a></p>
+                    <p><a href="directory.html">Member Directory</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Eagle Harbor Citizens Association. All rights reserved. | Paradise on The Patuxent</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        navMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Login form handling
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple demo validation - in real implementation, this would connect to a secure authentication system
+            if (username && password) {
+                alert('Directory access feature is currently being set up. Please contact the board for immediate access to member information.');
+            } else {
+                alert('Please enter both username and password.');
+            }
+        });
+    </script>
+</body>
+</html>

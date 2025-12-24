@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Eagle Harbor - Eagle Harbor Citizens Association</title>
+    <meta name="description" content="Learn about Eagle Harbor's rich history as a historic African American waterfront community founded in 1929. Discover our heritage, sustainability efforts, and community spirit.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2c5aa0;
+            --secondary-color: #1a4480;
+            --accent-color: #f4a261;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --background-light: #f8f9fa;
+            --white: #ffffff;
+            --gradient-bg: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--gradient-bg);
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(44, 90, 160, 0.9), rgba(26, 68, 128, 0.9)), 
+                        url('https://images.squarespace-cdn.com/content/v1/5e4189ef737c87523354706f/faf6ae4c-d661-414e-9b82-791c59f18d6c/Patuxent+River+Eagle+Harbor.jpeg');
+            background-size: cover;
+            background-position: center;
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* History Section */
+        .history-section {
+            background: var(--white);
+            padding: 4rem 0;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .history-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .history-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .history-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .history-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .history-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background: var(--accent-color);
+            border: 4px solid var(--primary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background: var(--white);
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--background-light);
+            padding: 4rem 0;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Leadership Section */
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .leader-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .leader-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid var(--primary-color);
+        }
+
+        .leader-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .leader-title {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .leader-bio {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section p, .footer-section a {
+            color: #bbb;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #bbb;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .history-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0%;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-anchor"></i>
+                <div>
+                    <div class="logo-text">Eagle Harbor CA</div>
+                    <div class="tagline">Paradise on The Patuxent</div>
+                </div>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="directory.html">Directory</a></li>
+                <li><a href="documents.html">Documents</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>About Eagle Harbor</h1>
+            <p>Discover the rich history and heritage of our treasured waterfront community</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- History Section -->
+            <section class="history-section">
+                <div class="container">
+                    <h2 class="section-title">Our Heritage</h2>
+                    <div class="history-content">
+                        <div class="history-text">
+                            <h3>A Place of Freedom, Beauty, and Opportunity</h3>
+                            <p>Eagle Harbor is a rare and treasured community along the Patuxent River—one of a few historic waterfront African American communities remaining in the United States. Our town was founded in 1929 as a place of freedom, beauty, and opportunity during a time when such spaces were precious and few.</p>
+                            <p>Here, the rush of city life gives way to peace, natural splendor, and a sense of belonging. From the sunrise over the Patuxent River to eagles soaring above, Eagle Harbor offers a daily escape and serves as a reminder of life's simple joys.</p>
+                            <p>We are committed to preserving our heritage while providing a welcoming space for residents and visitors to relax, connect, and enjoy recreational activities in our waterfront environment.</p>
+                        </div>
+                        <div class="history-image">
+                            <img src="https://live.staticflickr.com/4390/36562286982_61fe4da802_b.jpg" alt="Historic Eagle Harbor">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline -->
+            <section class="section">
+                <h2 class="section-title">Our Timeline</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">1929</div>
+                            <div class="timeline-title">Foundation of Eagle Harbor</div>
+                            <p>Eagle Harbor was established as one of the first African American waterfront resort communities in Maryland, providing a safe haven for families seeking recreation and community.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">1950s-60s</div>
+                            <div class="timeline-title">Golden Era of Growth</div>
+                            <p>The community flourished as a popular destination for African American families from Washington D.C. and Baltimore, featuring beaches, cottages, and recreational facilities.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2018</div>
+                            <div class="timeline-title">Sustainable Community Designation</div>
+                            <p>Maryland designated Eagle Harbor as a Sustainable Community, recognizing our commitment to environmental stewardship and community resilience.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2020</div>
+                            <div class="timeline-title">National Heritage Recognition</div>
+                            <p>Destination Southern Maryland National Heritage Area designated Eagle Harbor as a Historical Black Site, cementing our place in American history.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2025</div>
+                            <div class="timeline-title">New Leadership Era</div>
+                            <p>Mayor James S. Jones and new commissioners were sworn in, bringing fresh vision while honoring our rich heritage and community traditions.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="container">
+                    <h2 class="section-title">Eagle Harbor by the Numbers</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">96</div>
+                            <div class="stat-label">Years of History</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">70</div>
+                            <div class="stat-label">Residents</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">1</div>
+                            <div class="stat-label">Mile of Waterfront</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Board Members</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="section">
+                <h2 class="section-title">What Makes Us Special</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-landmark"></i>
+                        <h3>Historic Significance</h3>
+                        <p>As one of the few remaining historic African American waterfront communities in the United States, we preserve an important piece of American history and culture.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Environmental Stewardship</h3>
+                        <p>Our Sustainable Community designation reflects our commitment to environmental protection, climate resilience, and responsible waterfront development.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-water"></i>
+                        <h3>Patuxent River Access</h3>
+                        <p>Direct access to the beautiful Patuxent River provides opportunities for boating, fishing, kayaking, and enjoying Maryland's natural waterways.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-home"></i>
+                        <h3>Close-Knit Community</h3>
+                        <p>With about 70 residents, Eagle Harbor maintains the intimate, family-friendly atmosphere that has defined our community for nearly a century.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Strategic Location</h3>
+                        <p>Located in Prince George's County, we offer peaceful waterfront living while remaining accessible to Washington D.C. and Baltimore metropolitan areas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <h3>Active Community Life</h3>
+                        <p>Regular events, town meetings, and celebrations keep our community connected and engaged throughout the year.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leadership Section -->
+            <section class="section">
+                <h2 class="section-title">Community Leadership</h2>
+                <div class="leadership-grid">
+                    <div class="leader-card">
+                        <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=JJ" alt="Mayor James S. Jones">
+                        <div class="leader-name">James S. Jones</div>
+                        <div class="leader-title">Mayor</div>
+                        <p class="leader-bio">Former Road Commissioner, now leading Eagle Harbor with a commitment to preserving our heritage while providing welcoming spaces for residents and visitors.</p>
+                    </div>
+                    <div class="leader-card">
+                        <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=AB" alt="Commissioner Alton Branson">
+                        <div class="leader-name">Alton Branson</div>
+                        <div class="leader-title">Commissioner</div>
+                        <p class="leader-bio">Dedicated to community development and maintaining the high standards that make Eagle Harbor a special place to live.</p>
+                    </div>
+                    <div class="leader-card">
+                        <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=HB" alt="Commissioner Harold Bryant II">
+                        <div class="leader-name">Harold Bryant II</div>
+                        <div class="leader-title">Commissioner</div>
+                        <p class="leader-bio">Focused on infrastructure improvements and ensuring our community remains sustainable for future generations.</p>
+                    </div>
+                    <div class="leader-card">
+                        <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=PC" alt="Commissioner Patricia Crews">
+                        <div class="leader-name">Patricia Crews</div>
+                        <div class="leader-title">Commissioner</div>
+                        <p class="leader-bio">Passionate about community engagement and organizing events that bring our neighbors together.</p>
+                    </div>
+                    <div class="leader-card">
+                        <img src="https://via.placeholder.com/120x120/2c5aa0/ffffff?text=DL" alt="Commissioner Donnie Littlejohn">
+                        <div class="leader-name">Donnie Littlejohn</div>
+                        <div class="leader-title">Commissioner</div>
+                        <p class="leader-bio">Committed to preserving our waterfront environment and promoting recreational opportunities for all residents.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 23308 Hawkins Drive<br>Aquasco, MD 20608-0028</p>
+                    <p><i class="fas fa-phone"></i> (301) 888-2410</p>
+                    <p><i class="fas fa-envelope"></i> info@eagleharborca.org</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="about.html">About Eagle Harbor</a></p>
+                    <p><a href="events.html">Community Events</a></p>
+                    <p><a href="documents.html">Important Documents</a></p>
+                    <p><a href="contact.html">Contact Board</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Community Resources</h3>
+                    <p><a href="https://townofeagleharborincmd.org" target="_blank">Official Town Website</a></p>
+                    <p><a href="documents.html">Constitution & Bylaws</a></p>
+                    <p><a href="gallery.html">Photo Gallery</a></p>
+                    <p><a href="directory.html">Member Directory</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Eagle Harbor Citizens Association. All rights reserved. | Paradise on The Patuxent</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        navMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

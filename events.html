@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Events - Eagle Harbor Citizens Association</title>
+    <meta name="description" content="Stay updated with Eagle Harbor community events, meetings, and celebrations. Join us for town meetings, holiday celebrations, and community activities.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2c5aa0;
+            --secondary-color: #1a4480;
+            --accent-color: #f4a261;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --background-light: #f8f9fa;
+            --white: #ffffff;
+            --gradient-bg: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--gradient-bg);
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(44, 90, 160, 0.9), rgba(26, 68, 128, 0.9)), 
+                        url('https://live.staticflickr.com/4414/36592798561_bf2977609c_b.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* Calendar Integration */
+        .calendar-section {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .calendar-embed {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .calendar-instructions {
+            background: var(--background-light);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .calendar-instructions h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Events Grid */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .event-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .event-date {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-month {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .event-content {
+            padding: 2rem;
+        }
+
+        .event-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .event-time {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .event-description {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .event-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .event-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Event Categories */
+        .event-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-filter {
+            padding: 10px 20px;
+            background: var(--white);
+            border: 2px solid var(--primary-color);
+            border-radius: 25px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .category-filter:hover, .category-filter.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Add Event Section */
+        .add-event-section {
+            background: var(--background-light);
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .add-event-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section p, .footer-section a {
+            color: #bbb;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #bbb;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calendar-section {
+                padding: 2rem;
+            }
+
+            .calendar-embed {
+                height: 400px;
+            }
+
+            .event-actions {
+                flex-direction: column;
+            }
+
+            .event-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-anchor"></i>
+                <div>
+                    <div class="logo-text">Eagle Harbor CA</div>
+                    <div class="tagline">Paradise on The Patuxent</div>
+                </div>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html" class="active">Events</a></li>
+                <li><a href="directory.html">Directory</a></li>
+                <li><a href="documents.html">Documents</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Community Events</h1>
+            <p>Stay connected with Eagle Harbor through our community events, meetings, and celebrations</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Google Calendar Integration -->
+            <section class="calendar-section">
+                <div class="calendar-header">
+                    <h3>Eagle Harbor Community Calendar</h3>
+                    <p>View all upcoming events, meetings, and community activities in our integrated calendar</p>
+                </div>
+                
+                <!-- Google Calendar Embed -->
+                <iframe class="calendar-embed" 
+                        src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&showTitle=0&showPrint=0&showTabs=1&showCalendars=0&mode=MONTH"
+                        frameborder="0" 
+                        scrolling="no">
+                </iframe>
+                
+                <div class="calendar-instructions">
+                    <h4>How to Use the Calendar</h4>
+                    <ul>
+                        <li>Click on any event to view details</li>
+                        <li>Use the navigation arrows to browse different months</li>
+                        <li>Switch between Month, Week, and Agenda views</li>
+                        <li>Add events to your personal Google Calendar by clicking the event</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Event Categories -->
+            <div class="event-categories">
+                <a href="#" class="category-filter active" data-category="all">All Events</a>
+                <a href="#" class="category-filter" data-category="meetings">Town Meetings</a>
+                <a href="#" class="category-filter" data-category="social">Social Events</a>
+                <a href="#" class="category-filter" data-category="community">Community Service</a>
+                <a href="#" class="category-filter" data-category="holiday">Holiday Celebrations</a>
+            </div>
+
+            <!-- Featured Events -->
+            <h2 class="section-title">Featured Events</h2>
+            <div class="events-grid">
+                <div class="event-card" data-category="meetings">
+                    <div class="event-header">
+                        <div class="event-date">15</div>
+                        <div class="event-month">January 2025</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Monthly Town Meeting</h3>
+                        <div class="event-time"><i class="fas fa-clock"></i> 7:00 PM - 9:00 PM</div>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Eagle Harbor Community Center</span>
+                        </div>
+                        <p class="event-description">Join us for our regular monthly meeting to discuss community matters, upcoming projects, and address resident concerns. All community members are welcome to attend.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary">Add to Calendar</a>
+                            <a href="#" class="btn btn-outline">More Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="social">
+                    <div class="event-header">
+                        <div class="event-date">14</div>
+                        <div class="event-month">February 2025</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Valentine's Community Dinner</h3>
+                        <div class="event-time"><i class="fas fa-clock"></i> 6:00 PM - 9:00 PM</div>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Waterfront Pavilion</span>
+                        </div>
+                        <p class="event-description">Celebrate love and community with a special dinner event for all residents and their families. Enjoy delicious food, music, and fellowship by the water.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary">RSVP Required</a>
+                            <a href="#" class="btn btn-outline">View Menu</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="community">
+                    <div class="event-header">
+                        <div class="event-date">10</div>
+                        <div class="event-month">March 2025</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Spring Cleanup Day</h3>
+                        <div class="event-time"><i class="fas fa-clock"></i> 9:00 AM - 3:00 PM</div>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Community-wide</span>
+                        </div>
+                        <p class="event-description">Help beautify our community with our annual spring cleanup and beautification project. Tools and refreshments will be provided.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary">Volunteer</a>
+                            <a href="#" class="btn btn-outline">What to Bring</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="holiday">
+                    <div class="event-header">
+                        <div class="event-date">4</div>
+                        <div class="event-month">July 2025</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Independence Day Celebration</h3>
+                        <div class="event-time"><i class="fas fa-clock"></i> 2:00 PM - 10:00 PM</div>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Waterfront Park</span>
+                        </div>
+                        <p class="event-description">Join us for our annual 4th of July celebration featuring BBQ, games, live music, and fireworks over the Patuxent River.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                            <a href="#" class="btn btn-outline">Volunteer</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="meetings">
+                    <div class="event-header">
+                        <div class="event-date">20</div>
+                        <div class="event-month">August 2025</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Annual Town Day</h3>
+                        <div class="event-time"><i class="fas fa-clock"></i> 11:00 AM - 6:00 PM</div>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Town Center</span>
+                        </div>
+                        <p class="event-description">Our biggest community event of the year featuring local vendors, historical displays, children's activities, and community awards.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary">Vendor Info</a>
+                            <a href="#" class="btn btn-outline">Schedule</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card" data-category="social">
+                    <div class="event-header">
+                        <div class="event-date">15</div>
+                        <div class="event-month">December 2025</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Holiday Celebration</h3>
+                        <div class="event-time"><i class="fas fa-clock"></i> 5:00 PM - 8:00 PM</div>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Community Center</span>
+                        </div>
+                        <p class="event-description">Ring in the holiday season with our annual celebration featuring caroling, hot cocoa, and a visit from Santa for the children.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary">RSVP</a>
+                            <a href="#" class="btn btn-outline">Bring a Dish</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Event Section -->
+            <section class="add-event-section">
+                <h3>Want to Add an Event?</h3>
+                <p>Community members can submit events for consideration. Contact the board or use our event submission form.</p>
+                <a href="contact.html" class="btn btn-primary">Submit Event</a>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 23308 Hawkins Drive<br>Aquasco, MD 20608-0028</p>
+                    <p><i class="fas fa-phone"></i> (301) 888-2410</p>
+                    <p><i class="fas fa-envelope"></i> info@eagleharborca.org</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="about.html">About Eagle Harbor</a></p>
+                    <p><a href="events.html">Community Events</a></p>
+                    <p><a href="documents.html">Important Documents</a></p>
+                    <p><a href="contact.html">Contact Board</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Community Resources</h3>
+                    <p><a href="https://townofeagleharborincmd.org" target="_blank">Official Town Website</a></p>
+                    <p><a href="documents.html">Constitution & Bylaws</a></p>
+                    <p><a href="gallery.html">Photo Gallery</a></p>
+                    <p><a href="directory.html">Member Directory</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Eagle Harbor Citizens Association. All rights reserved. | Paradise on The Patuxent</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Event category filtering
+        const categoryFilters = document.querySelectorAll('.category-filter');
+        const eventCards = document.querySelectorAll('.event-card');
+
+        categoryFilters.forEach(filter => {
+            filter.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all filters
+                categoryFilters.forEach(f => f.classList.remove('active'));
+                // Add active class to clicked filter
+                filter.classList.add('active');
+                
+                const category = filter.getAttribute('data-category');
+                
+                eventCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Close mobile menu when clicking on a link
+        navMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents - Eagle Harbor Citizens Association</title>
+    <meta name="description" content="Access important Eagle Harbor Citizens Association documents including constitution, bylaws, meeting minutes, permits, and community resources.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2c5aa0;
+            --secondary-color: #1a4480;
+            --accent-color: #f4a261;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --background-light: #f8f9fa;
+            --white: #ffffff;
+            --gradient-bg: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--gradient-bg);
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(44, 90, 160, 0.9), rgba(26, 68, 128, 0.9)), 
+                        url('https://live.staticflickr.com/4390/36562286982_61fe4da802_b.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* Document Categories */
+        .document-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-filter {
+            padding: 10px 20px;
+            background: var(--white);
+            border: 2px solid var(--primary-color);
+            border-radius: 25px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .category-filter:hover, .category-filter.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Documents Grid */
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .document-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .document-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .document-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .document-header i {
+            font-size: 2rem;
+        }
+
+        .document-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .document-meta {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .document-content {
+            padding: 2rem;
+        }
+
+        .document-description {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .document-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-accent {
+            background: var(--accent-color);
+            color: var(--white);
+        }
+
+        .btn-accent:hover {
+            background: #e76f51;
+        }
+
+        /* Document Status */
+        .document-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-current {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-archived {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-draft {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* Quick Access Section */
+        .quick-access {
+            background: var(--background-light);
+            padding: 3rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .quick-access h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .quick-link {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-dark);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-3px);
+            color: var(--primary-color);
+        }
+
+        .quick-link i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .quick-link h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Document Request Section */
+        .document-request {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .document-request h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .document-request p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section p, .footer-section a {
+            color: #bbb;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #bbb;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .documents-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .document-actions {
+                flex-direction: column;
+            }
+
+            .document-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-anchor"></i>
+                <div>
+                    <div class="logo-text">Eagle Harbor CA</div>
+                    <div class="tagline">Paradise on The Patuxent</div>
+                </div>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="directory.html">Directory</a></li>
+                <li><a href="documents.html" class="active">Documents</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Community Documents</h1>
+            <p>Access important Eagle Harbor Citizens Association documents, bylaws, and community resources</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Quick Access -->
+            <section class="quick-access">
+                <h3>Quick Access</h3>
+                <div class="quick-links">
+                    <a href="#" class="quick-link">
+                        <i class="fas fa-gavel"></i>
+                        <h4>Constitution</h4>
+                        <p>Founding document</p>
+                    </a>
+                    <a href="#" class="quick-link">
+                        <i class="fas fa-book"></i>
+                        <h4>Bylaws</h4>
+                        <p>Operating rules</p>
+                    </a>
+                    <a href="#" class="quick-link">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h4>Meeting Minutes</h4>
+                        <p>Recent meetings</p>
+                    </a>
+                    <a href="#" class="quick-link">
+                        <i class="fas fa-file-contract"></i>
+                        <h4>Permits</h4>
+                        <p>Applications & forms</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Document Categories -->
+            <div class="document-categories">
+                <a href="#" class="category-filter active" data-category="all">All Documents</a>
+                <a href="#" class="category-filter" data-category="governance">Governance</a>
+                <a href="#" class="category-filter" data-category="meetings">Meetings</a>
+                <a href="#" class="category-filter" data-category="permits">Permits & Forms</a>
+                <a href="#" class="category-filter" data-category="financial">Financial</a>
+                <a href="#" class="category-filter" data-category="community">Community Resources</a>
+            </div>
+
+            <!-- Documents Grid -->
+            <div class="documents-grid">
+                <!-- Governance Documents -->
+                <div class="document-card" data-category="governance">
+                    <div class="document-header">
+                        <i class="fas fa-gavel"></i>
+                        <div class="document-info">
+                            <h3>EHCA Constitution</h3>
+                            <div class="document-meta">Updated: January 2025 | PDF</div>
+                        </div>
+                    </div>
+                    <div class="document-content">
+                        <div class="document-status status-current">Current Version</div>
+                        <p class="document-description">The founding constitution of the Eagle Harbor Citizens Association, establishing our community governance structure, rights, and responsibilities.</p>
+                        <div class="document-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-outline">View Online</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="document-card" data-category="governance">
+                    <div class="document-header">
+                        <i class="fas fa-book"></i>
+                        <div class="document-info">
+                            <h3>Community Bylaws</h3>
+                            <div class="document-meta">Updated: December 2024 | PDF</div>
+                        </div>
+                    </div>
+                    <div class="document-content">
+                        <div class="document-status status-current">Current Version</div>
+                        <p class="document-description">Detailed operating procedures, meeting protocols, and community guidelines that govern daily operations of the Citizens Association.</p>
+                        <div class="document-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-outline">View Online</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meeting Documents -->
+                <div class="document-card" data-category="meetings">
+                    <div class="document-header">
+                        <i class="fas fa-clipboard-list"></i>
+                        <div class="document-info">
+                            <h3>January 2025 Meeting Minutes</h3>
+                            <div class="document-meta">January 15, 2025 | PDF</div>
+                        </div>
+                    </div>
+                    <div class="document-content">
+                        <div class="document-status status-current">Latest Meeting</div>
+                        <p class="document-description">Minutes from the January 2025 monthly town meeting including discussions on community improvements, budget updates, and upcoming events.</p>
+                        <div class="document-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-outline">View Online</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="document-card" data-category="meetings">
+                    <div class="document-header">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div class="document-info">
+                            <h3>2025 Meeting Schedule</h3>
+                            <div class="document-meta">Updated: January 2025 | PDF</div>
+                        </div>
+                    </div>
+                    <div class="document-content">
+                        <div class="document-status status-current">Current Year</div>
+                        <p class="document-description">Complete schedule of all 2025 town meetings, special sessions, and community events with dates, times, and agenda topics.</p>
+                        <div class="document-actions">
+                            <a href="#" class="btn btn-primary">Download PDF</a>
+                            <a href="#" class="btn btn-accent">Add to Calendar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Permits & Forms -->
+                <div class="document-card" data-category="permits">
+                    <div class="document-header">
+                        <i class="fas fa-fire"></i>
+                        <div class="document-info">
+                            <h3>Open Fire Permit Application</h3>
+                            <div class="document-meta">Form | PDF</div>
+                        </div>
+                    </div>
+                    <div class="document-content">
+                        <div class="document-status status-current">Active Form</div>
+                        <p class="document-description">Required application for outdoor burning, fire pits, and recreational fires within Eagle Harbor community boundaries.</p>
+                        <div class="document-actions">
+                            <a href="#" class="btn btn-primary">Download Form</a>
+                            <a href="#" class="btn btn-outline">Submit Online</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="document-card" data-category="permits">
+                    <div class="document-header">
+                        <i class="fas fa-home"></i>
+                        <div class="document-info">
+                            <h3>Prince George's County Permits Guide</h3>
+                            <div class="document-meta">Reference Guide | PDF</div>
+                        </div>
+                    </div>
+                    <div class="document-content">
+                        <div class="document-status status-current">Current Guide</div>
+                        <p class="document-description">Comprehensive guide to county permits for home improvements, renovations, and construction projects in Eagle Harbor.</p>
+                        <div class="document-actions">
+                            <a href="#" class="btn btn-primary">Download Guide</a>
+                            <a href="#" class="btn btn-outline">County Website</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Documents -->
+                <div class="document-card" data-category="financial">
+                    <div class="document-header">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="document-info">
+                            <h3>2024 Annual Budget Report</h3>
+                            <div class="document-meta">December 2024 | PDF</div>
+                        </div>
+                    </div>
+                    <div class="document-content">
+                        <div class="document-status status-current">Latest Report</div>
+                        <p class="document-description">Complete financial overview of 2024 community expenses, revenue, and budget allocation for infrastructure and community programs.</p>
+                        <div class="document-actions">
+                            <a href="#" class="btn btn-primary">Download Report</a>
+                            <a href="#" class="btn btn-outline">View Summary</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community Resources -->
+                <div class="document-card" data-category="community">
+                    <div class="document-header">
+                        <i class="fas fa-leaf"></i>
+                        <div class="document-info">
+                            <h3>Sustainability Plan Summary</h3>
+                            <div class="document-meta">2025 Plan | PDF</div>
+                        </div>
+                    </div>
+                    <div class="document-content">
+                        <div class="document-status status-current">Active Plan</div>
+                        <p class="document-description">Eagle Harbor's comprehensive sustainability and environmental resilience plan as a designated Maryland Sustainable Community.</p>
+                        <div class="document-actions">
+                            <a href="#" class="btn btn-primary">Download Plan</a>
+                            <a href="#" class="btn btn-outline">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="document-card" data-category="community">
+                    <div class="document-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="document-info">
+                            <h3>Neighborhood Watch Program</h3>
+                            <div class="document-meta">Information Pamphlet | PDF</div>
+                        </div>
+                    </div>
+                    <div class="document-content">
+                        <div class="document-status status-current">Active Program</div>
+                        <p class="document-description">Information about Eagle Harbor's neighborhood watch program, safety protocols, and how residents can participate in community security.</p>
+                        <div class="document-actions">
+                            <a href="#" class="btn btn-primary">Download Pamphlet</a>
+                            <a href="#" class="btn btn-accent">Join Program</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document Request Section -->
+            <section class="document-request">
+                <h3>Need a Specific Document?</h3>
+                <p>Can't find what you're looking for? Contact the Citizens Association board to request specific documents, historical records, or additional community information.</p>
+                <a href="contact.html" class="btn btn-primary">Request Document</a>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 23308 Hawkins Drive<br>Aquasco, MD 20608-0028</p>
+                    <p><i class="fas fa-phone"></i> (301) 888-2410</p>
+                    <p><i class="fas fa-envelope"></i> info@eagleharborca.org</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="about.html">About Eagle Harbor</a></p>
+                    <p><a href="events.html">Community Events</a></p>
+                    <p><a href="documents.html">Important Documents</a></p>
+                    <p><a href="contact.html">Contact Board</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Community Resources</h3>
+                    <p><a href="https://townofeagleharborincmd.org" target="_blank">Official Town Website</a></p>
+                    <p><a href="documents.html">Constitution & Bylaws</a></p>
+                    <p><a href="gallery.html">Photo Gallery</a></p>
+                    <p><a href="directory.html">Member Directory</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Eagle Harbor Citizens Association. All rights reserved. | Paradise on The Patuxent</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Document category filtering
+        const categoryFilters = document.querySelectorAll('.category-filter');
+        const documentCards = document.querySelectorAll('.document-card');
+
+        categoryFilters.forEach(filter => {
+            filter.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all filters
+                categoryFilters.forEach(f => f.classList.remove('active'));
+                // Add active class to clicked filter
+                filter.classList.add('active');
+                
+                const category = filter.getAttribute('data-category');
+                
+                documentCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Close mobile menu when clicking on a link
+        navMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Document download simulation
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            if (btn.textContent.includes('Download')) {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert('Document download feature is being set up. Please contact the board for immediate access to documents.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

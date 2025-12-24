@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery - Eagle Harbor Citizens Association</title>
+    <meta name="description" content="Explore Eagle Harbor's photo gallery featuring community events, waterfront beauty, historical moments, and the natural splendor of our Patuxent River community.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2c5aa0;
+            --secondary-color: #1a4480;
+            --accent-color: #f4a261;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --background-light: #f8f9fa;
+            --white: #ffffff;
+            --gradient-bg: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--gradient-bg);
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(44, 90, 160, 0.9), rgba(26, 68, 128, 0.9)), 
+                        url('https://live.staticflickr.com/4414/36592798561_bf2977609c_b.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* Gallery Categories */
+        .gallery-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-filter {
+            padding: 10px 20px;
+            background: var(--white);
+            border: 2px solid var(--primary-color);
+            border-radius: 25px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .category-filter:hover, .category-filter.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-item {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+        }
+
+        .gallery-info {
+            padding: 1.5rem;
+        }
+
+        .gallery-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-date {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .gallery-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .gallery-tag {
+            background: var(--background-light);
+            color: var(--text-dark);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Featured Gallery Section */
+        .featured-gallery {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .featured-gallery h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: 300px 300px;
+            gap: 1rem;
+        }
+
+        .featured-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-item:hover {
+            transform: scale(1.02);
+        }
+
+        .featured-item.large {
+            grid-row: span 2;
+        }
+
+        .featured-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: var(--white);
+            padding: 2rem 1.5rem 1.5rem;
+        }
+
+        .featured-overlay h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 0;
+            width: 90%;
+            max-width: 800px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .modal-info {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .modal-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: var(--white);
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: var(--accent-color);
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background: var(--background-light);
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .upload-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .upload-section p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section p, .footer-section a {
+            color: #bbb;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #bbb;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, 250px);
+            }
+
+            .featured-item.large {
+                grid-row: span 1;
+            }
+
+            .gallery-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .modal-content {
+                width: 95%;
+                top: 5%;
+                transform: none;
+            }
+
+            .close {
+                top: 10px;
+                right: 20px;
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-anchor"></i>
+                <div>
+                    <div class="logo-text">Eagle Harbor CA</div>
+                    <div class="tagline">Paradise on The Patuxent</div>
+                </div>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="directory.html">Directory</a></li>
+                <li><a href="documents.html">Documents</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Photo Gallery</h1>
+            <p>Explore the beauty and community spirit of Eagle Harbor through our photo collection</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Featured Gallery -->
+            <section class="featured-gallery">
+                <h3>Featured Photos</h3>
+                <div class="featured-grid">
+                    <div class="featured-item large" onclick="openModal('https://news.maryland.gov/dhcd/wp-content/uploads/sites/16/2018/08/Eagle_Harbor_waterfront.jpg', 'Eagle Harbor Waterfront', 'Beautiful view of our historic waterfront community along the Patuxent River')">
+                        <img src="https://news.maryland.gov/dhcd/wp-content/uploads/sites/16/2018/08/Eagle_Harbor_waterfront.jpg" alt="Eagle Harbor Waterfront">
+                        <div class="featured-overlay">
+                            <h4>Eagle Harbor Waterfront</h4>
+                            <p>Our beautiful Patuxent River community</p>
+                        </div>
+                    </div>
+                    <div class="featured-item" onclick="openModal('https://live.staticflickr.com/4405/36592800741_fe7d251676_b.jpg', 'Community Gathering', 'Residents enjoying a beautiful day by the water')">
+                        <img src="https://live.staticflickr.com/4405/36592800741_fe7d251676_b.jpg" alt="Community Gathering">
+                        <div class="featured-overlay">
+                            <h4>Community Gathering</h4>
+                            <p>Neighbors enjoying our waterfront</p>
+                        </div>
+                    </div>
+                    <div class="featured-item" onclick="openModal('https://live.staticflickr.com/4390/36562286982_61fe4da802_b.jpg', 'Historic Eagle Harbor', 'A glimpse into our rich 96-year history')">
+                        <img src="https://live.staticflickr.com/4390/36562286982_61fe4da802_b.jpg" alt="Historic Eagle Harbor">
+                        <div class="featured-overlay">
+                            <h4>Historic Eagle Harbor</h4>
+                            <p>96 years of community heritage</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gallery Categories -->
+            <div class="gallery-categories">
+                <a href="#" class="category-filter active" data-category="all">All Photos</a>
+                <a href="#" class="category-filter" data-category="events">Community Events</a>
+                <a href="#" class="category-filter" data-category="waterfront">Waterfront Views</a>
+                <a href="#" class="category-filter" data-category="historical">Historical</a>
+                <a href="#" class="category-filter" data-category="nature">Nature & Wildlife</a>
+                <a href="#" class="category-filter" data-category="celebrations">Celebrations</a>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid">
+                <div class="gallery-item" data-category="waterfront" onclick="openModal('https://images.squarespace-cdn.com/content/v1/5e4189ef737c87523354706f/faf6ae4c-d661-414e-9b82-791c59f18d6c/Patuxent+River+Eagle+Harbor.jpeg', 'Patuxent River Vista', 'Stunning view of the Patuxent River from Eagle Harbor showing the natural beauty that surrounds our community.')">
+                    <img src="https://images.squarespace-cdn.com/content/v1/5e4189ef737c87523354706f/faf6ae4c-d661-414e-9b82-791c59f18d6c/Patuxent+River+Eagle+Harbor.jpeg" alt="Patuxent River Vista" class="gallery-image">
+                    <div class="gallery-info">
+                        <h4 class="gallery-title">Patuxent River Vista</h4>
+                        <div class="gallery-date">March 2024</div>
+                        <p class="gallery-description">Stunning view of the Patuxent River from Eagle Harbor showing the natural beauty that surrounds our community.</p>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Waterfront</span>
+                            <span class="gallery-tag">Nature</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="events" onclick="openModal('https://img.marinas.com/v2/149a6f3c9505c95b67ef40e0a1752e610b001d5d737c28f6bfb26f089f7ed8b5.jpg', '2024 Town Day Celebration', 'Annual Town Day celebration bringing together residents for food, fun, and community fellowship.')">
+                    <img src="https://img.marinas.com/v2/149a6f3c9505c95b67ef40e0a1752e610b001d5d737c28f6bfb26f089f7ed8b5.jpg" alt="Town Day Celebration" class="gallery-image">
+                    <div class="gallery-info">
+                        <h4 class="gallery-title">2024 Town Day Celebration</h4>
+                        <div class="gallery-date">August 2024</div>
+                        <p class="gallery-description">Annual Town Day celebration bringing together residents for food, fun, and community fellowship.</p>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Events</span>
+                            <span class="gallery-tag">Community</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="historical" onclick="openModal('https://live.staticflickr.com/4414/36592798561_bf2977609c_b.jpg', 'Historical Eagle Harbor', 'A look back at Eagle Harbor\'s rich history as one of the few remaining historic African American waterfront communities.')">
+                    <img src="https://live.staticflickr.com/4414/36592798561_bf2977609c_b.jpg" alt="Historical Eagle Harbor" class="gallery-image">
+                    <div class="gallery-info">
+                        <h4 class="gallery-title">Historical Eagle Harbor</h4>
+                        <div class="gallery-date">Historical Archive</div>
+                        <p class="gallery-description">A look back at Eagle Harbor's rich history as one of the few remaining historic African American waterfront communities.</p>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Historical</span>
+                            <span class="gallery-tag">Heritage</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="nature" onclick="openModal('https://img.marinas.com/v2/48f55504ec07d5a8bb3a988db08e6964ab3fe233e0360c7b45396e4e7c62acac.jpg', 'Wildlife at Eagle Harbor', 'The diverse wildlife that calls our waterfront community home, including the eagles that give our town its name.')">
+                    <img src="https://img.marinas.com/v2/48f55504ec07d5a8bb3a988db08e6964ab3fe233e0360c7b45396e4e7c62acac.jpg" alt="Wildlife at Eagle Harbor" class="gallery-image">
+                    <div class="gallery-info">
+                        <h4 class="gallery-title">Wildlife at Eagle Harbor</h4>
+                        <div class="gallery-date">June 2024</div>
+                        <p class="gallery-description">The diverse wildlife that calls our waterfront community home, including the eagles that give our town its name.</p>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Nature</span>
+                            <span class="gallery-tag">Wildlife</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="celebrations" onclick="openModal('https://img.marinas.com/v2/d7ef9e01a2d85b6dac3ad2096a71cbd9e7ad0752742883b8b8f640e90c785ca1.jpg', 'Holiday Celebration 2024', 'Community members gathering for our annual holiday celebration with festive decorations and warm fellowship.')">
+                    <img src="https://img.marinas.com/v2/d7ef9e01a2d85b6dac3ad2096a71cbd9e7ad0752742883b8b8f640e90c785ca1.jpg" alt="Holiday Celebration" class="gallery-image">
+                    <div class="gallery-info">
+                        <h4 class="gallery-title">Holiday Celebration 2024</h4>
+                        <div class="gallery-date">December 2024</div>
+                        <p class="gallery-description">Community members gathering for our annual holiday celebration with festive decorations and warm fellowship.</p>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Celebrations</span>
+                            <span class="gallery-tag">Holidays</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="waterfront" onclick="openModal('https://img.marinas.com/v2/670cd12bc71b4b6fffcef860fae6f07d0a35a1d5db83d93a95dadf50e35b9c84.jpg', 'Sunset Over the Patuxent', 'A breathtaking sunset over the Patuxent River as seen from Eagle Harbor, showcasing the natural beauty of our location.')">
+                    <img src="https://img.marinas.com/v2/670cd12bc71b4b6fffcef860fae6f07d0a35a1d5db83d93a95dadf50e35b9c84.jpg" alt="Sunset Over the Patuxent" class="gallery-image">
+                    <div class="gallery-info">
+                        <h4 class="gallery-title">Sunset Over the Patuxent</h4>
+                        <div class="gallery-date">September 2024</div>
+                        <p class="gallery-description">A breathtaking sunset over the Patuxent River as seen from Eagle Harbor, showcasing the natural beauty of our location.</p>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Waterfront</span>
+                            <span class="gallery-tag">Sunset</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="events" onclick="openModal('https://media.nbcwashington.com/2019/09/eagle-harbor-photo-2.jpg', 'Community Meeting', 'Residents gathering for a monthly town meeting to discuss community matters and upcoming projects.')">
+                    <img src="https://media.nbcwashington.com/2019/09/eagle-harbor-photo-2.jpg" alt="Community Meeting" class="gallery-image">
+                    <div class="gallery-info">
+                        <h4 class="gallery-title">Community Meeting</h4>
+                        <div class="gallery-date">January 2025</div>
+                        <p class="gallery-description">Residents gathering for a monthly town meeting to discuss community matters and upcoming projects.</p>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Events</span>
+                            <span class="gallery-tag">Meetings</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="nature" onclick="openModal('https://www.usatoday.com/gcdn/authoring/authoring-images/2025/06/12/USAT/84172591007-7959.jpg', 'Spring at Eagle Harbor', 'The beautiful spring scenery around Eagle Harbor with blooming flowers and lush greenery along the waterfront.')">
+                    <img src="https://www.usatoday.com/gcdn/authoring/authoring-images/2025/06/12/USAT/84172591007-7959.jpg" alt="Spring at Eagle Harbor" class="gallery-image">
+                    <div class="gallery-info">
+                        <h4 class="gallery-title">Spring at Eagle Harbor</h4>
+                        <div class="gallery-date">April 2024</div>
+                        <p class="gallery-description">The beautiful spring scenery around Eagle Harbor with blooming flowers and lush greenery along the waterfront.</p>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Nature</span>
+                            <span class="gallery-tag">Spring</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <h3>Share Your Eagle Harbor Photos</h3>
+                <p>Have photos from community events, beautiful waterfront views, or historical moments? We'd love to add them to our gallery! Contact the Citizens Association board to submit your photos.</p>
+                <a href="contact.html" class="btn btn-primary">Submit Photos</a>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div id="photoModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <div class="modal-info">
+                <h3 id="modalTitle" class="modal-title"></h3>
+                <p id="modalDescription" class="modal-description"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 23308 Hawkins Drive<br>Aquasco, MD 20608-0028</p>
+                    <p><i class="fas fa-phone"></i> (301) 888-2410</p>
+                    <p><i class="fas fa-envelope"></i> info@eagleharborca.org</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="about.html">About Eagle Harbor</a></p>
+                    <p><a href="events.html">Community Events</a></p>
+                    <p><a href="documents.html">Important Documents</a></p>
+                    <p><a href="contact.html">Contact Board</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Community Resources</h3>
+                    <p><a href="https://townofeagleharborincmd.org" target="_blank">Official Town Website</a></p>
+                    <p><a href="documents.html">Constitution & Bylaws</a></p>
+                    <p><a href="gallery.html">Photo Gallery</a></p>
+                    <p><a href="directory.html">Member Directory</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Eagle Harbor Citizens Association. All rights reserved. | Paradise on The Patuxent</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Gallery category filtering
+        const categoryFilters = document.querySelectorAll('.category-filter');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        categoryFilters.forEach(filter => {
+            filter.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all filters
+                categoryFilters.forEach(f => f.classList.remove('active'));
+                // Add active class to clicked filter
+                filter.classList.add('active');
+                
+                const category = filter.getAttribute('data-category');
+                
+                galleryItems.forEach(item => {
+                    if (category === 'all' || item.getAttribute('data-category') === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Modal functions
+        function openModal(imageSrc, title, description) {
+            const modal = document.getElementById('photoModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            modalImage.src = imageSrc;
+            modalTitle.textContent = title;
+            modalDescription.textContent = description;
+            modal.style.display = 'block';
+            
+            // Prevent body scrolling when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('photoModal');
+            modal.style.display = 'none';
+            
+            // Restore body scrolling
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('photoModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        navMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
