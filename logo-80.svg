@@ -1,0 +1,35 @@
+<svg width="80" height="80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c5aa0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a4480;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Circle background -->
+  <circle cx="40" cy="40" r="38" fill="url(#grad1)" stroke="#f4a261" stroke-width="3"/>
+  
+  <!-- Simplified eagle silhouette -->
+  <g transform="translate(40, 40) scale(1.33)">
+    <!-- Eagle head -->
+    <circle cx="0" cy="-8" r="5" fill="#ffffff"/>
+    <circle cx="-1.5" cy="-9" r="1" fill="#2c5aa0"/>
+    
+    <!-- Eagle body -->
+    <ellipse cx="0" cy="2" rx="6" ry="8" fill="#ffffff"/>
+    
+    <!-- Wings -->
+    <path d="M -6 0 Q -15 -3, -18 2 Q -15 5, -6 3 Z" fill="#ffffff" opacity="0.9"/>
+    <path d="M 6 0 Q 15 -3, 18 2 Q 15 5, 6 3 Z" fill="#ffffff" opacity="0.9"/>
+    
+    <!-- Tail -->
+    <path d="M -3 10 L 0 14 L 3 10 Z" fill="#ffffff"/>
+    
+    <!-- Anchor element (for harbor theme) -->
+    <g transform="translate(0, 16) scale(0.15)">
+      <path d="M 0 -20 L 0 20 M -10 15 Q -10 25, 0 25 Q 10 25, 10 15 M -15 0 L 15 0" 
+            stroke="#f4a261" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <circle cx="0" cy="-20" r="3" fill="#f4a261"/>
+    </g>
+  </g>
+</svg>
