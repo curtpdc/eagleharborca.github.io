@@ -456,7 +456,6 @@
                 <div>
                     <div class="logo-text">Eagle Harbor Citizens Association</div>
                     <div class="location">Eagle Harbor, MD</div>
-                    <div class="tagline">Paradise on The Patuxent</div>
                 </div>
             </div>
             <ul class="nav-menu" id="navMenu">
@@ -642,6 +641,15 @@
             if (e.target.tagName === 'A') {
                 navMenu.classList.remove('active');
             }
+        });
+    </script>
+
+    <!-- Eagle Harbor Chatbot Widget -->
+    <script src="chatbot-widget.js"></script>
+    <script>
+        // Initialize chatbot when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new EagleHarborChatbot();
         });
     </script>
 </body>
