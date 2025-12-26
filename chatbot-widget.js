@@ -325,6 +325,192 @@ class EagleHarborChatbot {
                     left: 20px;
                 }
             }
+
+            /* Introduction Popup Styles */
+            .eh-chatbot-intro-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 10001;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                animation: eh-fadeIn 0.3s ease;
+            }
+
+            .eh-chatbot-intro-overlay.active {
+                display: flex;
+            }
+
+            .eh-chatbot-intro-popup {
+                background: white;
+                border-radius: 20px;
+                padding: 30px;
+                max-width: 450px;
+                width: calc(100% - 40px);
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                animation: eh-slideUp 0.4s ease;
+                position: relative;
+            }
+
+            .eh-chatbot-intro-close {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: none;
+                border: none;
+                color: var(--eh-text-light);
+                font-size: 24px;
+                cursor: pointer;
+                transition: color 0.3s ease;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .eh-chatbot-intro-close:hover {
+                color: var(--eh-text-dark);
+            }
+
+            .eh-chatbot-intro-icon {
+                width: 80px;
+                height: 80px;
+                background: linear-gradient(135deg, var(--eh-primary-color), var(--eh-secondary-color));
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 40px;
+                color: white;
+                margin: 0 auto 20px;
+                box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+            }
+
+            .eh-chatbot-intro-title {
+                font-family: 'Playfair Display', serif;
+                font-size: 28px;
+                color: var(--eh-primary-color);
+                text-align: center;
+                margin-bottom: 15px;
+                font-weight: 700;
+            }
+
+            .eh-chatbot-intro-subtitle {
+                font-size: 16px;
+                color: var(--eh-accent-color);
+                text-align: center;
+                font-style: italic;
+                margin-bottom: 20px;
+            }
+
+            .eh-chatbot-intro-content {
+                font-size: 15px;
+                line-height: 1.8;
+                color: var(--eh-text-dark);
+                margin-bottom: 25px;
+                text-align: center;
+            }
+
+            .eh-chatbot-intro-features {
+                background: var(--eh-background-light);
+                border-radius: 10px;
+                padding: 20px;
+                margin-bottom: 25px;
+            }
+
+            .eh-chatbot-intro-feature {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 12px;
+                font-size: 14px;
+                color: var(--eh-text-dark);
+            }
+
+            .eh-chatbot-intro-feature:last-child {
+                margin-bottom: 0;
+            }
+
+            .eh-chatbot-intro-feature-icon {
+                width: 24px;
+                height: 24px;
+                background: var(--eh-primary-color);
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                flex-shrink: 0;
+            }
+
+            .eh-chatbot-intro-button {
+                width: 100%;
+                padding: 14px 20px;
+                background: var(--eh-primary-color);
+                color: white;
+                border: none;
+                border-radius: 10px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .eh-chatbot-intro-button:hover {
+                background: var(--eh-secondary-color);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+            }
+
+            @keyframes eh-fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
+            @keyframes eh-slideUp {
+                from {
+                    transform: translateY(50px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .eh-chatbot-intro-popup {
+                    padding: 25px 20px;
+                }
+
+                .eh-chatbot-intro-title {
+                    font-size: 24px;
+                }
+
+                .eh-chatbot-intro-subtitle {
+                    font-size: 14px;
+                }
+
+                .eh-chatbot-intro-content {
+                    font-size: 14px;
+                }
+
+                .eh-chatbot-intro-icon {
+                    width: 70px;
+                    height: 70px;
+                    font-size: 35px;
+                }
+            }
         `;
 
         const styleSheet = document.createElement('style');
@@ -334,6 +520,44 @@ class EagleHarborChatbot {
 
     createChatbotHTML() {
         const chatbotHTML = `
+            <!-- Introduction Popup -->
+            <div class="eh-chatbot-intro-overlay" id="ehChatbotIntroOverlay">
+                <div class="eh-chatbot-intro-popup">
+                    <button class="eh-chatbot-intro-close" id="ehChatbotIntroClose">
+                        &#xf00d;
+                    </button>
+                    <div class="eh-chatbot-intro-icon">
+                        &#x2693;
+                    </div>
+                    <h2 class="eh-chatbot-intro-title">Meet Your Eagle Harbor Assistant</h2>
+                    <p class="eh-chatbot-intro-subtitle">Your friendly guide to our historic community</p>
+                    <p class="eh-chatbot-intro-content">
+                        Hello! I'm the Eagle Harbor Community Assistant, here to help you learn about our beautiful historic waterfront community. Founded in 1929, Eagle Harbor is one of the few remaining African American waterfront communities in the United States.
+                    </p>
+                    <div class="eh-chatbot-intro-features">
+                        <div class="eh-chatbot-intro-feature">
+                            <div class="eh-chatbot-intro-feature-icon">&#x2713;</div>
+                            <div>Learn about our 95-year history and heritage</div>
+                        </div>
+                        <div class="eh-chatbot-intro-feature">
+                            <div class="eh-chatbot-intro-feature-icon">&#x2713;</div>
+                            <div>Discover upcoming community events and activities</div>
+                        </div>
+                        <div class="eh-chatbot-intro-feature">
+                            <div class="eh-chatbot-intro-feature-icon">&#x2713;</div>
+                            <div>Get contact information for board members</div>
+                        </div>
+                        <div class="eh-chatbot-intro-feature">
+                            <div class="eh-chatbot-intro-feature-icon">&#x2713;</div>
+                            <div>Find out about waterfront amenities and recreation</div>
+                        </div>
+                    </div>
+                    <button class="eh-chatbot-intro-button" id="ehChatbotIntroStart">
+                        Start Chatting
+                    </button>
+                </div>
+            </div>
+
             <button class="eh-chatbot-toggle" id="ehChatbotToggle">
                 &#xf086;
             </button>
@@ -400,6 +624,9 @@ class EagleHarborChatbot {
         this.input = document.getElementById('ehChatInput');
         this.sendBtn = document.getElementById('ehChatSend');
         this.typingIndicator = document.getElementById('ehTypingIndicator');
+        this.introOverlay = document.getElementById('ehChatbotIntroOverlay');
+        this.introCloseBtn = document.getElementById('ehChatbotIntroClose');
+        this.introStartBtn = document.getElementById('ehChatbotIntroStart');
     }
 
     initializeEventListeners() {
@@ -408,6 +635,15 @@ class EagleHarborChatbot {
         this.sendBtn.addEventListener('click', () => this.sendMessage());
         this.input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.sendMessage();
+        });
+
+        // Introduction popup event listeners
+        this.introCloseBtn.addEventListener('click', () => this.closeIntroPopup());
+        this.introStartBtn.addEventListener('click', () => this.startChatFromIntro());
+        this.introOverlay.addEventListener('click', (e) => {
+            if (e.target === this.introOverlay) {
+                this.closeIntroPopup();
+            }
         });
 
         // Quick actions
@@ -425,6 +661,9 @@ class EagleHarborChatbot {
                 this.closeChat();
             }
         });
+
+        // Show introduction popup on first visit
+        this.checkAndShowIntroPopup();
     }
 
     initializeKnowledgeBase() {
@@ -635,6 +874,33 @@ class EagleHarborChatbot {
         setTimeout(() => {
             this.messages.scrollTop = this.messages.scrollHeight;
         }, 100);
+    }
+
+    checkAndShowIntroPopup() {
+        // Check if user has seen the intro popup before
+        const hasSeenIntro = localStorage.getItem('ehChatbotIntroSeen');
+        
+        if (!hasSeenIntro) {
+            // Show intro popup after a short delay
+            setTimeout(() => {
+                this.showIntroPopup();
+            }, 1500);
+        }
+    }
+
+    showIntroPopup() {
+        this.introOverlay.classList.add('active');
+    }
+
+    closeIntroPopup() {
+        this.introOverlay.classList.remove('active');
+        // Mark as seen so it doesn't show again
+        localStorage.setItem('ehChatbotIntroSeen', 'true');
+    }
+
+    startChatFromIntro() {
+        this.closeIntroPopup();
+        this.openChat();
     }
 }
 
